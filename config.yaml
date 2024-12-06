@@ -1,0 +1,7 @@
+data_source:
+  provider: "yfinance"  # default provider
+  parameters: {}  # empty parameters for yfinance
+  # For Alpha Vantage, would be:
+  # provider: "alphavantage"
+  # parameters:
+  #   api_key: "YOUR_API_KEY"
