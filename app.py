@@ -1,3 +1,11 @@
+import streamlit as st
+import pandas as pd
+import numpy as np
+import yfinance as yf
+import plotly.graph_objects as go
+from datetime import datetime, timedelta
+from data_sources import get_data_source  # Add this new import
+
 class TradingStrategy:
     def __init__(self):
         """Initialize default parameters"""
@@ -8,12 +16,12 @@ class TradingStrategy:
             'stop_loss': 2.0,
             'take_profit': 5.0
         }
+        self.data_source = get_data_source()  # Add this line
         
     def get_data(self, ticker, start_date, end_date):
         """Download stock data"""
         try:
-            data = yf.download(ticker, start=start_date, end=end_date)
-            return data
+            return self.data_source.get_data(ticker, start_date, end_date)
         except Exception as e:
             st.error(f"Error downloading data: {str(e)}")
             return None
