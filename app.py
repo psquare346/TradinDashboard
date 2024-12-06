@@ -42,3 +42,32 @@ class TradingStrategy:
         signals['RSI'] = 100 - (100 / (1 + rs))
         
         return signals
+
+# Test code
+if __name__ == "__main__":
+    strategy = TradingStrategy()
+    
+    # Test data download
+    test_data = strategy.get_data(
+        ticker="AAPL",
+        start_date="2024-01-01",
+        end_date="2024-01-31"
+    )
+    
+    if test_data is not None:
+        print("Data download successful!")
+        print("\nFirst few rows of data:")
+        print(test_data.head())
+        
+        # Test indicator calculation
+        signals = strategy.calculate_indicators(
+            data=test_data,
+            short_ma=20,
+            long_ma=50,
+            rsi_period=14
+        )
+        
+        print("\nCalculated indicators:")
+        print(signals.head())
+    else:
+        print("Failed to download data!")
